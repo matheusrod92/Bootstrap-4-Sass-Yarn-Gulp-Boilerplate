@@ -6,7 +6,8 @@ var gulp = require('gulp'),
     concat = require('gulp-concat'),
     uglify = require('gulp-uglify'),
     imagemin = require('gulp-imagemin')
-    browserSync = require('browser-sync');
+    browserSync = require('browser-sync'),
+    bulkSass = require('gulp-sass-bulk-import');
 
 var config = {
   stylesPath: 'assets/styles',
@@ -31,6 +32,7 @@ gulp.task('images', function() { 
 
 gulp.task('css', function() {
   return gulp.src(config.stylesPath + '/main.scss')
+    .pipe(bulkSass())
     .pipe(sass({
         outputStyle: 'compressed',
         includePaths: [

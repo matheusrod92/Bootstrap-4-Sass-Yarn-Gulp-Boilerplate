@@ -12,6 +12,7 @@
     "gulp-imagemin": "^3.3.0",
     "gulp-notify": "^3.0.0",
     "gulp-sass": "^3.1.0",
+    "gulp-sass-bulk-import": "^1.0.1",
     "gulp-uglify": "^3.0.0"
   },
   "dependencies": {

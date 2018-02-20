@@ -5,4 +5,7 @@
 
 //import your stylesheets below
 
-@import "common";
+@import "globals/**/*";
+@import "base";
+@import "modules/**/*";
+@import "partials/**/*";

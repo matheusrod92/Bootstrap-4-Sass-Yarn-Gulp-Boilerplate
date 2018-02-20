@@ -1,9 +1,10 @@
 {
-  "name": "bootstrap-4-sass-yarn-gulp-boilerplate",
-  "version": "0.1",
+  "name": "accenture-landing-page",
+  "version": "1.0.0",
   "license": "MIT",
-  "author": "@daveflynn",
+  "author": "Matheus Rodrigues <matheus@gama.academy>",
   "devDependencies": {
+    "browser-sync": "^2.23.6",
     "gulp": "^3.9.1",
     "gulp-autoprefixer": "^4.0.0",
     "gulp-concat": "^2.6.1",

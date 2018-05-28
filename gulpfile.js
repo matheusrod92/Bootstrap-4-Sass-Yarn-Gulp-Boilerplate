@@ -1,4 +1,4 @@
-var gulp = require('gulp'),
+const gulp = require('gulp'),
     sass = require ('gulp-sass'),
     notify = require('gulp-notify'),
     filter = require('gulp-filter'),
@@ -7,17 +7,27 @@ var gulp = require('gulp'),
     uglify = require('gulp-uglify'),
     imagemin = require('gulp-imagemin')
     browserSync = require('browser-sync'),
-    bulkSass = require('gulp-sass-bulk-import');
+    bulkSass = require('gulp-sass-bulk-import'),
+    gutil = require('gulp-util'),
+    babel = require('gulp-babel');
 
-var config = {
+const config = {
   stylesPath: 'assets/styles',
   jsPath: 'assets/scripts',
   imagesPath: 'assets/images',
   outputDir: 'public/dist',
   htmlPath: 'public/'
-}
+};
 
-
+const tasks = [
+  'icons',
+  'css',
+  'jquery',
+  'popper',
+  'bootstrap-js',
+  'js',
+  'images',
+];
 
 gulp.task('icons', function() { 
   return gulp.src('./node_modules/font-awesome/fonts/**.*') 
@@ -31,6 +41,7 @@ gulp.task('images', function() { 
 });
 
 gulp.task('css', function() {
+  console.log(`building css at ${Date.now()}`);
   return gulp.src(config.stylesPath + '/main.scss')
     .pipe(bulkSass())
     .pipe(sass({
@@ -66,7 +77,16 @@ gulp.task('js', function() {
   return gulp.src(config.jsPath+'/*')
     .pipe(filter('**/*.js'))
     .pipe(concat('main.js'))
-    .pipe(uglify())
+    .pipe(babel({
+      presets: ['es2015']
+    }))
+    .pipe(
+      uglify()
+        .on('error', function(err) {
+          gutil.log(gutil.color.red('[Error]'), err.toString());
+          this.emit('end');
+        })
+    )
     .pipe(gulp.dest(config.outputDir + '/js'))
     .pipe(browserSync.reload({stream:true, once: true}));
 });
@@ -83,7 +103,9 @@ gulp.task('bs-reload', function() {
   browserSync.reload();
 });
 
-gulp.task('default', ['icons', 'css', 'jquery', 'popper','bootstrap-js', 'js', 'browser-sync'], function() {
+gulp.task('build', tasks, function() {})
+
+gulp.task('default', [...tasks, 'browser-sync'], function() {
   gulp.watch([config.stylesPath + '**/*.scss', config.stylesPath + '**/*.sass', config.stylesPath + '**/*.css'], ['css']);
   gulp.watch([config.jsPath + '**/*.js'], ['js']);
   gulp.watch([config.imagesPath + '/**/*'], ['images']);

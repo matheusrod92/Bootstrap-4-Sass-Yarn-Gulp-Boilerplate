@@ -1,6 +1,6 @@
 {
-  "name": "accenture-landing-page",
-  "version": "1.0.0",
+  "name": "simple-web-app-boilerplate",
+  "version": "2.0.0",
   "license": "MIT",
   "author": "Matheus Rodrigues <matheus@gama.academy>",
   "devDependencies": {
@@ -12,15 +12,16 @@
     "gulp-babel": "^7.0.1",
     "gulp-concat": "^2.6.1",
     "gulp-filter": "^5.0.1",
-    "gulp-imagemin": "^3.3.0",
+    "gulp-image": "^4.3.0",
     "gulp-notify": "^3.0.0",
+    "gulp-nunjucks": "^4.0.0",
     "gulp-sass": "^3.1.0",
     "gulp-sass-bulk-import": "^1.0.1",
     "gulp-uglify": "^3.0.0",
     "gulp-util": "^3.0.8"
   },
   "dependencies": {
-    "bootstrap": "4.0.0-beta",
+    "bootstrap": "4.1.3",
     "font-awesome": "^4.7.0",
     "jquery": "^3.2.1",
     "popper.js": "^1.12.2",
